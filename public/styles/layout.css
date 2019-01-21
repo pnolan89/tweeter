@@ -24,3 +24,12 @@ body {
 /*
  * Additional CSS can be defined below or in other CSS files, as per instructions
  */
+
+ main {
+  background-color: white;
+  width: 450px;
+  position: relative;
+  left: 50%;
+  margin-left: -225px;
+  margin-top: 140px;
+ }
