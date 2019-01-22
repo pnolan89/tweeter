@@ -1,0 +1,48 @@
+.tweet {
+  background-color: white;
+  border: 1px solid #dcdcdc;
+  border-radius: 5px;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+
+.tweet .userName {
+  margin: 0;
+  position: relative;
+  top: -30px;
+  font-weight: bold;
+  font-size: 1.5em;
+}
+
+.tweet header {
+  margin-bottom: 30px;
+  background-color: #eee;
+  width: 100%;
+  padding: 10px;
+}
+
+.tweet header img {
+  margin-right: 10px;
+  border-radius: 5px;
+}
+
+.tweet header .handle {
+  float: right;
+}
+
+.tweet .tweetContent {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.tweet footer {
+  padding: 10px;
+  border-top: 1px solid #eee;
+  margin-top: 30px;
+  height: 40px;
+}
+
+.tweet footer span {
+  font-size: 12px;
+}
