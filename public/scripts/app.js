@@ -47,15 +47,24 @@ $(function () {
   let $form = $('.new-tweet');
   $form.on('submit', function(event) {
     event.preventDefault();
-    let serialize = $(this).find('form').serialize();
-    $.ajax({
-      method: 'POST',
-      url: '/tweets',
-      data: serialize
-    })
-    .then(function () {
-      console.log('Success');
-    });
+    let text = $(this).find('textarea').val();
+    // Check if tweet is empty or exceeding the character limit
+    if (text === null || text === "") {
+      alert("You didn't enter any text!");
+    } else if (text.length > 140) {
+      alert("Character limit exceeded!");
+    // Otherwise, post data to server
+    } else {
+      let serialize = $(this).find('form').serialize();
+      $.ajax({
+        method: 'POST',
+        url: '/tweets',
+        data: serialize
+      })
+      .then(function () {
+        console.log('Success');
+      });
+    }
   });
 });
 
