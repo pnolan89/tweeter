@@ -15,7 +15,7 @@ function createTweetElement(tweet) {
       $('<i>').addClass('fas fa-retweet'),
       $('<i>').addClass('fas fa-flag')
     );
-    footer.append($('<span>').addClass("timestamp").text("10 days ago"), icons);
+    footer.append($(`<span data-livestamp="${(tweet.created_at)/1000}">`));
     $tweet.append(header, content, footer);
    return $tweet[0].outerHTML;
 }
@@ -36,22 +36,11 @@ function loadTweets() {
     url: '/tweets'
   })
   .then(function(data) {
-    console.log(data);
     renderTweets(data);
   });
 }
 
 $(document).ready(function() {
-  // // Get tweet JSONs from the server
-  // function loadTweets() {
-  //   $.ajax({
-  //     method: 'GET',
-  //     url: '/tweets'
-  //   })
-  //   .then(function(data) {
-  //     renderTweets(data);
-  //   });
-  // }
   loadTweets();
 });
 
@@ -75,7 +64,6 @@ $(function () {
         data: serialize
       })
       .then(function () {
-        console.log('Success!');
         loadTweets();
       });
     }
