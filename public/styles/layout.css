@@ -28,6 +28,7 @@ body {
  main {
   background-color: white;
   width: 450px;
+  height: 100vh;
   position: relative;
   left: 50%;
   margin-left: -225px;

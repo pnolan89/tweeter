@@ -24,6 +24,10 @@
   padding: 10px;
 }
 
+.tweet:hover header {
+  display: block;
+}
+
 .tweet header img {
   margin-right: 10px;
   border-radius: 5px;
@@ -57,59 +61,27 @@
   opacity: 0;
 }
 
-.tweet-hover {
-  background-color: white;
+.tweet:hover {
   border: 1px solid #6d6d6d;
-  border-radius: 5px;
-  margin-left: 20px;
-  margin-right: 20px;
-  margin-bottom: 20px;
 }
 
-.tweet-hover .userName {
-  margin: 0;
-  position: relative;
-  top: -30px;
-  font-weight: bold;
-  font-size: 1.5em;
+.tweet:hover .userName {
+  color: #164852;
 }
 
-.tweet-hover header {
-  margin-bottom: 30px;
+.tweet:hover header {
   background-color: #eeeeee;
-  border-radius: 5px 5px 0px 0px;
-  width: 100%;
-  padding: 10px;
 }
 
-.tweet-hover header img {
-  margin-right: 10px;
-  border-radius: 5px;
+.tweet:hover header img {
   opacity: 1;
 }
 
-.tweet-hover header .handle {
-  float: right;
+.tweet:hover header .handle {
   color: #7e7e7e;
 }
 
-.tweet-hover .tweetContent {
-  padding-left: 10px;
-  padding-right: 10px;
-}
 
-.tweet-hover footer {
-  padding: 10px;
-  border-top: 1px solid #eee;
-  margin-top: 30px;
-  height: 40px;
-}
-
-.tweet-hover footer .timestamp {
-  font-size: 12px;
-}
-
-.tweet-hover footer .icons {
-  float: right;
-  font-size: 12px;
+.tweet:hover footer .icons {
+  opacity: 1;
 }
