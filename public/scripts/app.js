@@ -44,11 +44,11 @@ const data = [
     "created_at": 1461113796368
   }
 ];
+
 function createTweetElement(tweet) {
-  $(document).ready(function() {
     let $tweet = $('<article>').addClass("tweet");
     let header = $('<header>');
-    let content = $('<span>').addClass("tweetContent").text("Hello");
+    let content = $('<p>').addClass("tweetContent").text(tweet.content.text);
     let footer = $('<footer>');
     let icons = $('<div>').addClass("icons");
     header.append(
@@ -63,11 +63,20 @@ function createTweetElement(tweet) {
     );
     footer.append($('<span>').addClass("timestamp").text("10 days ago"), icons);
     $tweet.append(header, content, footer);
-    console.log($tweet[0].outerHTML);
-  });
+   console.log($tweet);
+   return $tweet[0].outerHTML;
 }
 
-var $tweet = createTweetElement(tweetData);
+function renderTweets(tweets) {
+  for (let i in tweets) {
+     let render = createTweetElement(tweets[i]);
+     $('#tweets-container').append(render);
+  }
+}
+
+$(document).ready(function() {
+  renderTweets(data);
+});
 
 
 
