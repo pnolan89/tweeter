@@ -63,7 +63,6 @@ function createTweetElement(tweet) {
     );
     footer.append($('<span>').addClass("timestamp").text("10 days ago"), icons);
     $tweet.append(header, content, footer);
-   console.log($tweet);
    return $tweet[0].outerHTML;
 }
 
