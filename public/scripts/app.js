@@ -41,6 +41,8 @@ function loadTweets() {
 }
 
 $(document).ready(function() {
+  $(".new-tweet").hide();
+  $(".new-tweet").find("#errorMsg").hide();
   loadTweets();
 });
 
@@ -70,8 +72,21 @@ $(function () {
   });
 });
 
-$(function () {
 
+
+$(function () {
+  let $button = $('#composeBtn');
+  let composeHidden = true;
+  $button.on('click', function() {
+    if (composeHidden === true) {
+      $(".new-tweet").slideDown();
+      $(".new-tweet").find('textarea').focus();
+      composeHidden = false;
+    } else {
+      $(".new-tweet").slideUp();
+      composeHidden = true;
+    }
+  });
 });
 
 
