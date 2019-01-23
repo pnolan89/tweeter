@@ -4,7 +4,7 @@ $(document).ready(function() {
     if ((140 - $(this).val().length) < 0) {
       $('.counter').css({'color': 'red'});
     } else {
-      $('.counter').css({'color': 'blue'});
+      $('.counter').css({'color': ""});
     }
   });
 });
