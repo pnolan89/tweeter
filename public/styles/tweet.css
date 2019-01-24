@@ -91,3 +91,14 @@
 .tweet:hover footer .icons {
   opacity: 1;
 }
+
+#errorMsg {
+  color: #D8000C;
+  background-color: #FFD2D2;
+  height: 35px;
+  border-radius: 5px;
+  padding: 5px;
+  padding-left: 10px;
+  margin-bottom: 5px;
+  line-height: 1.6;
+}

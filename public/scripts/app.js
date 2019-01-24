@@ -40,25 +40,26 @@ function loadTweets() {
   });
 }
 
-$(document).ready(function() {
+$(function() {
   $(".new-tweet").hide();
   $(".new-tweet").find("#errorMsg").hide();
   loadTweets();
-});
 
-// When 'Compose Tweet' form is submitted, post  data to server
-$(function () {
+  // When 'Compose Tweet' form is submitted, post  data to server
   let $form = $('.new-tweet');
   $form.on('submit', function(event) {
     event.preventDefault();
     let text = $(this).find('textarea').val();
     // Check if tweet is empty or exceeding the character limit
     if (text === null || text === "") {
-      alert("You didn't enter any text!");
+      $('#errorMsg').slideDown();
+      $('#errorMsg').text("Error: You didn't enter any text!");
     } else if (text.length > 140) {
-      alert("Character limit exceeded!");
+      $('#errorMsg').slideDown();
+      $('#errorMsg').text("Error: Character limit exceeded!");
     // Otherwise, post data to server
     } else {
+      $('#errorMsg').slideUp();
       let serialize = $(this).find('form').serialize();
       $.ajax({
         method: 'POST',
@@ -70,23 +71,22 @@ $(function () {
       });
     }
   });
-});
 
-
-
-$(function () {
-  let $button = $('#composeBtn');
+  // When Compose button is clicked, show or hide 'Compose Tweet' window.
+  let $button = $('.composeBtn');
   let composeHidden = true;
   $button.on('click', function() {
     if (composeHidden === true) {
       $(".new-tweet").slideDown();
       $(".new-tweet").find('textarea').focus();
+      $(this).addClass('clicked');
+      let classes = $(this).attr("class");
+      console.log(classes);
       composeHidden = false;
     } else {
       $(".new-tweet").slideUp();
+      $(this).removeClass('clicked');
       composeHidden = true;
     }
   });
 });
-
-

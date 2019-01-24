@@ -24,7 +24,7 @@
   line-height: 2.5;
 }
 
-#composeBtn {
+.composeBtn {
   float: right;
   margin-top: 10px;
   border: 1px solid black;
@@ -35,7 +35,12 @@
   font-size: 18px;
 }
 
-#composeBtn:hover {
+.composeBtn:hover {
+  background-color: #e2feff;
+  color: #00a386;
+}
+
+.composeBtn.clicked {
   background-color: #e2feff;
   color: #00a386;
 }
