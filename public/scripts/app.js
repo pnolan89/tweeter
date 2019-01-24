@@ -11,11 +11,14 @@ function createTweetElement(tweet) {
     $('<span>').addClass("handle").text(tweet.user.handle)
   );
   icons.append(
-    $('<i>').addClass('fas fa-heart'),
+    $('<a>').addClass("likeBtn").attr("liked", false).append($('<i>').addClass('fas fa-heart')),
     $('<i>').addClass('fas fa-retweet'),
     $('<i>').addClass('fas fa-flag')
   );
-  footer.append($(`<span data-livestamp="${(tweet.created_at)/1000}">`), icons);
+  footer.append(
+    $(`<span data-livestamp="${(tweet.created_at)/1000}">`),
+    $('<span>').addClass('likeCounter').text(`${tweet.likes} likes`),
+    icons);
   $tweet.append(header, content, footer);
   return $tweet[0].outerHTML;
 }
@@ -24,6 +27,7 @@ function createTweetElement(tweet) {
 function renderTweets(tweets) {
   $('#tweets-container').empty();
   for (let i = (tweets.length - 1); i >= 0; i--) {
+    console.log(tweets[i]);
     let render = createTweetElement(tweets[i]);
     $('#tweets-container').append(render);
   }

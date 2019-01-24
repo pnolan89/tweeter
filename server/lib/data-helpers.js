@@ -12,6 +12,14 @@ module.exports = function makeDataHelpers(db) {
     // Get all tweets in `db`, sorted by newest first
     getTweets: function(callback) {
       db.collection("tweets").find().toArray(callback);
-    }
+    },
+
+    // addLike: function(tweet_id, value, callback) {
+    //   db.collection("tweets").findOneAndUpdate(
+    //     { "_id": tweet_id },
+    //     { $inc: {"likes": 1}}
+    //   );
+    // }
+
   };
 };
