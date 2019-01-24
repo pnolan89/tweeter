@@ -1,0 +1,42 @@
+$font-stack: 'Roboto Condensed', sans-serif;
+$primary-color: #244751;
+$body-background-color: #eee;
+
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+/*
+ * Global layout stuff
+ */
+
+body {
+  margin: 0;
+  color: $primary-color;
+  background-color: $body-background-color;
+  font-family: $font-stack;
+}
+
+/*
+ * Additional CSS can be defined below or in other CSS files, as per instructions
+ */
+
+ main {
+  background-color: white;
+  width: 450px;
+  height: 100%;
+  position: relative;
+  left: 50%;
+  margin-left: -225px;
+  padding-top: 120px;
+  padding-bottom: 50px;
+ }
+
+ @import 'nav';
+
+ @import 'new-tweet';
+
+ @import 'tweet';

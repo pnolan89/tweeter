@@ -1,0 +1,48 @@
+#nav-bar {
+  top: 0;
+  margin: 0;
+  position: fixed;
+  height: 80px;
+  width: 100%;
+  background-color: #00a087;
+  color: #e8fdff;
+  padding-left: 2em;
+  padding-right: 2em;
+  z-index: 1;
+
+  .logo {
+  width: 80px;
+  height: 80px;
+  float: left;
+  }
+
+  .header {
+    margin-left: 10px;
+    font-size: 200%;
+    float: left;
+    line-height: 2.5;
+  }
+}
+
+
+
+.composeBtn {
+  float: right;
+  margin-top: 10px;
+  border: 1px solid black;
+  border-radius: 5px;
+  height: 60px;
+  width: 120px;
+  background-color: #e2feff;
+  color: #00a386;
+  font-size: 18px;
+
+  i {
+    padding-right: 5px;
+  }
+}
+
+.composeBtn:hover {
+  background-color: white;
+  color: black;
+}
