@@ -15,7 +15,7 @@ function createTweetElement(tweet) {
     $('<i>').addClass('fas fa-retweet'),
     $('<i>').addClass('fas fa-flag')
   );
-  footer.append($(`<span data-livestamp="${(tweet.created_at)/1000}">`));
+  footer.append($(`<span data-livestamp="${(tweet.created_at)/1000}">`), icons);
   $tweet.append(header, content, footer);
   return $tweet[0].outerHTML;
 }
