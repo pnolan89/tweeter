@@ -30,17 +30,16 @@
   border: 1px solid black;
   border-radius: 5px;
   height: 60px;
-  width: 100px;
-  color: black;
+  width: 120px;
+  background-color: #e2feff;
+  color: #00a386;
   font-size: 18px;
 }
 
 .composeBtn:hover {
-  background-color: #e2feff;
-  color: #00a386;
+  background-color: white;
+  color: black;
 }
-
-.composeBtn.clicked {
-  background-color: #e2feff;
-  color: #00a386;
+.composeBtn i {
+  padding-right: 5px;
 }
