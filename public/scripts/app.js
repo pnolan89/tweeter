@@ -1,4 +1,6 @@
 // Given a tweet JSON object, constructs a DOM node of it
+
+
 function createTweetElement(tweet) {
   let $tweet = $('<article>').addClass("tweet").attr({"id": tweet._id});
   let header = $('<header>');
@@ -101,7 +103,6 @@ $(function() {
       })
       .then(function() {
         loadTweets();
-        $(this).parents(".tweet").find(".likeCounter").text('');
         $(this).attr("liked", 1);
       });
     } else {

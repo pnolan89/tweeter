@@ -48,7 +48,6 @@ module.exports = function(DataHelpers) {
         console.log('Error');
         res.status(500).json({ error: err.message });
       } else {
-        console.log('Success');
         res.status(201).send();
       }
     });
