@@ -1,12 +1,3 @@
-// const express       = require("express");
-// const cookieSession = require("cookie-session");
-// const app           = express();
-
-// app.use(express.static("public"));
-// app.use(cookieSession({
-//   name: 'session',
-//   keys: ["20", "dfasd"]
-// }));
 
 // Given a tweet JSON object, constructs a DOM node of it
 function createTweetElement(tweet) {
@@ -107,12 +98,22 @@ $(function() {
       })
       .then(function() {
         loadTweets();
-        // console.log($(this).parent(".tweet").find('.likeCounter').text());
+        // console.log(typeof ($(this).parent(".tweet").find('.likeCounter').text()));
         $(this).attr("liked", 1);
       });
     } else {
       $(this).attr("liked", 0);
     }
+  });
+
+  let $loginForm = $('#loginForm');
+  $loginForm.on('submit', function(event) {
+    event.preventDefault();
+    $.ajax({
+      method: 'POST',
+      url: '/users/register',
+      data: $loginForm.serialize()
+    });
   });
 });
 

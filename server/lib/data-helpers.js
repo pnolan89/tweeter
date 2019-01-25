@@ -1,8 +1,6 @@
 "use strict";
 
 const {ObjectId} = require('mongodb');
-const cookieSession = require("cookie-session");
-const bcrypt        = require('bcrypt');
 
 // Returns an object of helper functions for interacting with the database ("db")
 module.exports = function makeDataHelpers(db) {
@@ -36,15 +34,7 @@ module.exports = function makeDataHelpers(db) {
       );
     },
 
-    userAuthenticate: function(user_id, password, callback) {
-
-    },
-
     userLogin: function(user_id, password, callback) {
-
-    },
-
-    userLogout: function(callback) {
 
     },
 

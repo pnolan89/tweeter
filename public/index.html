@@ -34,6 +34,21 @@
     <nav id="nav-bar">
       <img class="logo" src="/images/bird.png" width="80px" height="80px">
       <span class="header">Tweeter</span>
+      <form id="loginForm" action="/users/login" method="POST">
+        <label for="name">Name:</label>
+        <input  type="text" name="name" style="width: 300px">
+        <br><br>
+        <label for="handle">Handle:</label>
+        <input type="text" name="handle" style="width: 300px">
+        <br><br>
+        <label for="email">Email:</label>
+        <input type="email" name="email" style="width: 300px">
+        <br><br>
+        <label for="password">Password:</label>
+        <input type="password" name="password" style="width: 300px">
+        <br><br>
+        <input type="submit" class="button" value="Submit">
+      </form>
       <button class="composeBtn"><i class="fas fa-edit"></i>Compose</button>
     </nav>
 
