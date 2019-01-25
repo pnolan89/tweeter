@@ -1,6 +1,14 @@
+// const express       = require("express");
+// const cookieSession = require("cookie-session");
+// const app           = express();
+
+// app.use(express.static("public"));
+// app.use(cookieSession({
+//   name: 'session',
+//   keys: ["20", "dfasd"]
+// }));
+
 // Given a tweet JSON object, constructs a DOM node of it
-
-
 function createTweetElement(tweet) {
   let $tweet = $('<article>').addClass("tweet").attr({"id": tweet._id});
   let header = $('<header>');
@@ -50,7 +58,7 @@ $(function() {
   $(".new-tweet").find("#errorMsg").hide();
   loadTweets();
 
-  // When 'Compose Tweet' form is submitted, post  data to server
+  // When 'Compose Tweet' form is submitted:
   let $form = $('.new-tweet');
   $form.on('submit', function(event) {
     event.preventDefault();
@@ -66,7 +74,7 @@ $(function() {
         $('#errorMsg').text("Error: Character limit exceeded!");
       });
       $('#errorMsg').slideDown();
-    // Otherwise, post data to server
+    // Otherwise, post data to server, hide form, and show Compose button
     } else {
       $('#errorMsg').slideUp();
       let serialize = $(this).find('form').serialize();
@@ -77,22 +85,18 @@ $(function() {
       })
       .then(function () {
         loadTweets();
+        $form.slideUp();
+        $('.composeBtn').fadeIn();
       });
     }
   });
 
-  // When Compose button is clicked, show or hide 'Compose Tweet' window.
+  // When Compose button is clicked, show 'Compose Tweet' window and hide Compsoe button.
   let $button = $('.composeBtn');
-  let composeHidden = true;
   $button.on('click', function() {
-    if (composeHidden === true) {
-      $(".new-tweet").slideDown();
-      $(".new-tweet").find('textarea').focus();
-      composeHidden = false;
-    } else {
-      $(".new-tweet").slideUp();
-      composeHidden = true;
-    }
+    $(".new-tweet").slideDown();
+    $(".new-tweet").find('textarea').focus();
+    $button.fadeOut();
   });
 
   $('#tweets-container').on('click', '.likeBtn', function() {
@@ -103,6 +107,7 @@ $(function() {
       })
       .then(function() {
         loadTweets();
+        // console.log($(this).parent(".tweet").find('.likeCounter').text());
         $(this).attr("liked", 1);
       });
     } else {

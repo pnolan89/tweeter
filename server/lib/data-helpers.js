@@ -36,6 +36,10 @@ module.exports = function makeDataHelpers(db) {
       );
     },
 
+    userAuthenticate: function(user_id, password, callback) {
+
+    },
+
     userLogin: function(user_id, password, callback) {
 
     },

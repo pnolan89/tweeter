@@ -53,6 +53,17 @@ module.exports = function(DataHelpers) {
     });
   });
 
+  tweetsRoutes.delete("/:id", function(req, res) {
+    DataHelpers.minusLike(req.params.id, (err) => {
+      if (err) {
+        console.log('Error');
+        res.status(500).json({ error: err.message });
+      } else {
+        res.status(204).send();
+      }
+    });
+  });
+
 
   return tweetsRoutes;
 
