@@ -28,7 +28,6 @@ MongoClient.connect(MONGODB_URI, (err, db) => {
   // Pass the FUNCTIONS (DataHelpers) to tweetsRoutes: define ROUTES by mounting the FUNCTIONS onto METHODS and ACTIONS
   const tweetsRoutes = require("./routes/tweets")(DataHelpers);
 
-  console.log(db.collection("tweets").find().toArray);
 
   app.use("/tweets", tweetsRoutes);
 

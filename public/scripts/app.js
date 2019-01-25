@@ -1,6 +1,6 @@
 // Given a tweet JSON object, constructs a DOM node of it
 function createTweetElement(tweet) {
-  let $tweet = $('<article>').addClass("tweet");
+  let $tweet = $('<article>').addClass("tweet").attr({"id": tweet._id});
   let header = $('<header>');
   let content = $('<p>').addClass("tweetContent").text(tweet.content.text);
   let footer = $('<footer>');
@@ -11,7 +11,7 @@ function createTweetElement(tweet) {
     $('<span>').addClass("handle").text(tweet.user.handle)
   );
   icons.append(
-    $('<a>').addClass("likeBtn").attr("liked", false).append($('<i>').addClass('fas fa-heart')),
+    $('<i>').addClass("likeBtn").addClass("fas fa-heart"),
     $('<i>').addClass('fas fa-retweet'),
     $('<i>').addClass('fas fa-flag')
   );
@@ -27,7 +27,6 @@ function createTweetElement(tweet) {
 function renderTweets(tweets) {
   $('#tweets-container').empty();
   for (let i = (tweets.length - 1); i >= 0; i--) {
-    console.log(tweets[i]);
     let render = createTweetElement(tweets[i]);
     $('#tweets-container').append(render);
   }
@@ -91,6 +90,22 @@ $(function() {
     } else {
       $(".new-tweet").slideUp();
       composeHidden = true;
+    }
+  });
+
+  $('#tweets-container').on('click', '.likeBtn', function() {
+    if ($(this).attr("liked") === undefined || $(this).attr("liked") === 0) {
+      $.ajax({
+        method: 'POST',
+        url: `/tweets/${$(this).parents(".tweet").attr("id")}`
+      })
+      .then(function() {
+        loadTweets();
+        $(this).parents(".tweet").find(".likeCounter").text('');
+        $(this).attr("liked", 1);
+      });
+    } else {
+      $(this).attr("liked", 0);
     }
   });
 });
