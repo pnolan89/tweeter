@@ -5,18 +5,6 @@ const bcrypt = require('bcrypt');
 
 module.exports = function(DataHelpers) {
 
-  usersRoutes.post("/login", function(req, res) {
-    // DataHelpers.userLogin(req.body.user_id, req.body.password, (err) => {
-    //   if (err) {
-    //     res.status(500).json({ error: err.message });
-    //   } else {
-        req.session.user_id = req.body.user_id;
-        res.status(200).send();
-        console.log(req.session.user_id);
-  //     }
-    // });
-  });
-
   const generateRandomString = () => {
     return Math.random().toString(36).substring(2, 8);
   };
@@ -30,12 +18,13 @@ module.exports = function(DataHelpers) {
       name: req.body.name,
       handle: handle,
       email: req.body.email,
-      password: hash
+      password: hash,
+      likedTweets: []
     };
 
-    DataHelpers.checkUniqueEmail(user, (err, result) => {
+    DataHelpers.checkUniqueEmail(user.email, (err, result) => {
       if (err) {
-        res.status(500).json({ error: err.message});;
+        res.status(500).json({ error: err.message});
       } else {
         if (result !== null) {
           res.send("Email");
@@ -64,5 +53,30 @@ module.exports = function(DataHelpers) {
       }
     });
   });
+
+  usersRoutes.post("/login", function(req, res) {
+    let email = req.body.email;
+    let password = bcrypt.hashSync(req.body.password, 10);
+    console.log("111 string hash: ", bcrypt.hashSync("111", 10));
+    console.log("Actual: ", bcrypt.hashSync(req.body.password, 10));
+    DataHelpers.checkUniqueEmail(email, (err, result) => {
+      if (err) {
+        res.status(500).json({ error: err.message});
+      } else {
+        if (result === null) {
+          console.log("Email not found!");
+        } else {
+          if (bcrypt.compareSync(req.body.password, result.password)) {
+            req.session.user_id = result.id;
+            res.status(200).send();
+            console.log("Success!");
+          } else {
+            console.log("Not a match");
+          }
+        }
+      }
+    });
+  });
+
   return usersRoutes;
 };

@@ -16,11 +16,23 @@
   float: left;
   }
 
-  .header {
+  .title {
     margin-left: 10px;
     font-size: 200%;
     float: left;
     line-height: 2.5;
+    margin-right: 25px;
+  }
+
+  .navBtn {
+  margin-top: 20px;
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: #e2feff;
+  color: #00a386;
+  height: 40px;
+  padding: 10px;
+  margin-right: 10px;
   }
 }
 

@@ -34,20 +34,20 @@ module.exports = function makeDataHelpers(db) {
       );
     },
 
-    userLogin: function(user_id, password, callback) {
-
-    },
-
     userRegister: function(user, callback) {
       db.collection("users").insert(user, callback);
     },
 
-    checkUniqueEmail: function(user, callback) {
-      db.collection("users").findOne({ "email": user.email }, callback);
+    checkUniqueEmail: function(email, callback) {
+      db.collection("users").findOne({ "email": email }, callback);
     },
 
     checkUniqueHandle: function(user, callback) {
       db.collection("users").findOne({ "handle": user.handle }, callback);
+    },
+
+    checkPassword: function(email, password, callback) {
+      db.collection("users").findOne({ "email": email, "password": password}, callback);
     }
   };
 };

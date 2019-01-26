@@ -33,8 +33,16 @@
     <!-- Top nav bar (fixed) -->
     <nav id="nav-bar">
       <img class="logo" src="/images/bird.png" width="80px" height="80px">
-      <span class="header">Tweeter</span>
-      <form id="registerForm" action="/users/register" method="POST">
+      <span class="title">Tweeter</span>
+      <button id="loginBtn" class="navBtn">Login</button>
+      <button id="registerBtn" class="navBtn">Register</button>
+      <button class="composeBtn"><i class="fas fa-edit"></i>Compose</button>
+    </nav>
+
+    <!-- Page-specific (main) content here -->
+    <main class="container">
+      <form id="registerForm" class="userForm" action="/users/register" method="POST">
+        <h3>Register</h3>
         <label for="name">Name:</label>
         <input  type="text" name="name" style="width: 300px">
         <br><br>
@@ -49,11 +57,16 @@
         <br><br>
         <input type="submit" class="button" value="Submit">
       </form>
-      <button class="composeBtn"><i class="fas fa-edit"></i>Compose</button>
-    </nav>
-
-    <!-- Page-specific (main) content here -->
-    <main class="container">
+      <form id="loginForm" class="userForm" action="/users/login" method="POST">
+        <h3>Login</h3>
+        <label for="email">Email:</label>
+        <input type="email" name="email" style="width: 300px">
+        <br><br>
+        <label for="password">Password:</label>
+        <input type="password" name="password" style="width: 300px">
+        <br><br>
+        <input type="submit" class="button" value="Submit">
+      </form>
       <section class="new-tweet">
         <h2>Compose Tweet</h2>
         <form method='POST' action='/tweets/'>

@@ -30,6 +30,26 @@ main {
   padding-bottom: 50px;
 }
 
+.userForm {
+  background-color: white;
+  padding: 10px;
+  border: 1px solid black;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+}
+.userForm label {
+  display: inline-block;
+  background-color: white;
+  text-align: left;
+  width: 70px;
+}
+.userForm h3 {
+  margin: 0;
+  margin-bottom: 15px;
+}
+
 #nav-bar {
   top: 0;
   margin: 0;
@@ -47,11 +67,22 @@ main {
   height: 80px;
   float: left;
 }
-#nav-bar .header {
+#nav-bar .title {
   margin-left: 10px;
   font-size: 200%;
   float: left;
   line-height: 2.5;
+  margin-right: 25px;
+}
+#nav-bar .navBtn {
+  margin-top: 20px;
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: #e2feff;
+  color: #00a386;
+  height: 40px;
+  padding: 10px;
+  margin-right: 10px;
 }
 
 .composeBtn {
