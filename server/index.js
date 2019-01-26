@@ -1,6 +1,6 @@
 "use strict";
 
-// Basic express setup:
+// Dependency setup (express, body-parser, cookie-session, mongodb)
 
 const PORT          = 8080;
 const express       = require("express");
@@ -30,9 +30,8 @@ MongoClient.connect(MONGODB_URI, (err, db) => {
   // Pass database (db) to DataHelpers: define FUNCTIONS for interacting with db.
   const DataHelpers = require("./lib/data-helpers.js")(db);
 
-  // Pass the FUNCTIONS (DataHelpers) to tweetsRoutes: define ROUTES by mounting the FUNCTIONS onto METHODS and ACTIONS
+  // Pass the FUNCTIONS (DataHelpers) to Routes: define ROUTES by mounting the FUNCTIONS onto METHODS and ACTIONS
   const tweetsRoutes = require("./routes/tweets")(DataHelpers);
-
   const usersRoutes = require("./routes/users")(DataHelpers);
 
   app.use("/tweets", tweetsRoutes);

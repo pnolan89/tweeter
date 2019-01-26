@@ -84,6 +84,10 @@ main {
   padding: 10px;
   margin-right: 10px;
 }
+#nav-bar .navBtn:hover {
+  background-color: white;
+  color: black;
+}
 
 .composeBtn {
   float: right;

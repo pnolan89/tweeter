@@ -1,5 +1,24 @@
+// Retrieves tweet objects from the server
+function loadTweets() {
+  $.ajax({
+    method: 'GET',
+    url: '/tweets'
+  })
+  .then(function(data) {
+    renderTweets(data);
+  });
+}
 
-// Given a tweet JSON object, constructs a DOM node of it
+// Takes an array of tweet objects, passes each one to createTweetElement, and appends the rendered result to index.html
+function renderTweets(tweets) {
+  $('#tweets-container').empty();
+  for (let i = (tweets.length - 1); i >= 0; i--) {
+    let render = createTweetElement(tweets[i]);
+    $('#tweets-container').append(render);
+  }
+}
+
+// Takes a tweet object constructs a DOM node from it
 function createTweetElement(tweet) {
   let $tweet = $('<article>').addClass("tweet").attr({"id": tweet._id});
   let header = $('<header>');
@@ -24,35 +43,27 @@ function createTweetElement(tweet) {
   return $tweet[0].outerHTML;
 }
 
-// Loops through array of tweet objects, passes each one to createTweetElement, and appends the rendered result to index.html
-function renderTweets(tweets) {
-  $('#tweets-container').empty();
-  for (let i = (tweets.length - 1); i >= 0; i--) {
-    let render = createTweetElement(tweets[i]);
-    $('#tweets-container').append(render);
-  }
-}
-
-// Get tweet JSONs from the server
-function loadTweets() {
-  $.ajax({
-    method: 'GET',
-    url: '/tweets'
-  })
-  .then(function(data) {
-    renderTweets(data);
-  });
-}
-
+// "On page load" instructions begin here:
 $(function() {
+
+  // Hide new-tweet, register, and login forms
   $(".new-tweet").hide();
   $(".new-tweet").find("#errorMsg").hide();
   $("#registerForm").hide();
   $("#loginForm").hide();
 
+  // Load and render tweets from database
   loadTweets();
 
-  // When 'Compose Tweet' form is submitted:
+  // When Compose button is clicked: show new-tweet form and hide Compose button.
+  let $button = $('.composeBtn');
+  $button.on('click', function() {
+    $(".new-tweet").slideDown();
+    $(".new-tweet").find('textarea').focus();
+    $button.fadeOut();
+  });
+
+  // When new-tweet form is submitted:
   let $form = $('.new-tweet');
   $form.on('submit', function(event) {
     event.preventDefault();
@@ -85,30 +96,18 @@ $(function() {
     }
   });
 
-  // When Compose button is clicked, show 'Compose Tweet' window and hide Compsoe button.
-  let $button = $('.composeBtn');
-  $button.on('click', function() {
-    $(".new-tweet").slideDown();
-    $(".new-tweet").find('textarea').focus();
-    $button.fadeOut();
-  });
-
+  // When a tweet's like button is clicked: increases tweet's like-count by 1
   $('#tweets-container').on('click', '.likeBtn', function() {
-    if ($(this).attr("liked") === undefined || $(this).attr("liked") === 0) {
       $.ajax({
         method: 'POST',
         url: `/tweets/${$(this).parents(".tweet").attr("id")}`
       })
       .then(function() {
         loadTweets();
-        // console.log(typeof ($(this).parent(".tweet").find('.likeCounter').text()));
-        $(this).attr("liked", 1);
       });
-    } else {
-      $(this).attr("liked", 0);
-    }
   });
 
+  // When register button is clicked: shows register form and hides register button.
   let $registerBtn = $('#registerBtn');
   $registerBtn.on('click', function() {
     $('#registerForm').slideDown();
@@ -117,6 +116,7 @@ $(function() {
     $registerBtn.fadeOut();
   });
 
+  // When login button is clicked: shows login form and hides login button.
   let $loginBtn = $('#loginBtn');
   $loginBtn.on('click', function () {
     $('#registerForm').slideUp();
@@ -125,6 +125,7 @@ $(function() {
     $registerBtn.fadeIn();
   });
 
+  // When register form is submitted: posts data to server
   let $registerForm = $('#registerForm');
   $registerForm.on('submit', function(event) {
     event.preventDefault();
@@ -135,6 +136,7 @@ $(function() {
     });
   });
 
+  // When login form is submitted: posts data to server
   let $loginForm = $('#loginForm');
   $loginForm.on('submit', function(event) {
     event.preventDefault();

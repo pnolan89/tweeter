@@ -1,5 +1,7 @@
 "use strict";
 
+// This module routes all requests for the "/tweets/" path
+
 const userHelper    = require("../lib/util/user-helper")
 
 const express       = require('express');
@@ -7,6 +9,7 @@ const tweetsRoutes  = express.Router();
 
 module.exports = function(DataHelpers) {
 
+  // Retrieves tweets from database
   tweetsRoutes.get("/", function(req, res) {
     DataHelpers.getTweets((err, tweets) => {
       if (err) {
@@ -17,6 +20,7 @@ module.exports = function(DataHelpers) {
     });
   });
 
+  // Saves a new tweet to the database
   tweetsRoutes.post("/", function(req, res) {
     if (!req.body.text) {
       res.status(400).json({ error: 'invalid request: no data in POST body'});
@@ -42,6 +46,7 @@ module.exports = function(DataHelpers) {
     });
   });
 
+  // Add a like to a specific tweet
   tweetsRoutes.post("/:id", function(req, res) {
     DataHelpers.addLike(req.params.id, (err) => {
       if (err) {
@@ -53,6 +58,7 @@ module.exports = function(DataHelpers) {
     });
   });
 
+  // Removes a like from a specific tweet (*NOT YET IMPLEMENTED*)
   tweetsRoutes.delete("/:id", function(req, res) {
     DataHelpers.minusLike(req.params.id, (err) => {
       if (err) {

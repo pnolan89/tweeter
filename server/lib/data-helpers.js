@@ -6,17 +6,17 @@ const {ObjectId} = require('mongodb');
 module.exports = function makeDataHelpers(db) {
   return {
 
-    // Save a tweet
+    // Saves a tweet
     saveTweet: function(newTweet, callback) {
       db.collection("tweets").insert(newTweet, callback);
     },
 
-    // Get all tweets
+    // Retrieves all tweets in database
     getTweets: function(callback) {
       db.collection("tweets").find().toArray(callback);
     },
 
-    // Add a like to a specific tweet
+    // Adds a like to a specific tweet
     addLike: function(tweet_id, callback) {
       db.collection("tweets").findOneAndUpdate(
         { "_id": ObjectId(tweet_id)},
@@ -25,7 +25,7 @@ module.exports = function makeDataHelpers(db) {
       );
     },
 
-    // Remove a like from a specific tweet
+    // Removes a like from a specific tweet (*NOT YET IMPLEMENTED*)
     minusLike: function(tweet_id, callback) {
       db.collection("tweets").findOneAndUpdate(
         { "_id": ObjectId(tweet_id)},
@@ -34,18 +34,22 @@ module.exports = function makeDataHelpers(db) {
       );
     },
 
+    // Registers a new user
     userRegister: function(user, callback) {
       db.collection("users").insert(user, callback);
     },
 
+    // Checks if email already exists in database
     checkUniqueEmail: function(email, callback) {
       db.collection("users").findOne({ "email": email }, callback);
     },
 
+    // Checks if user handle already exists in database
     checkUniqueHandle: function(user, callback) {
       db.collection("users").findOne({ "handle": user.handle }, callback);
     },
 
+    // Checks if entered password matches the one in database for login
     checkPassword: function(email, password, callback) {
       db.collection("users").findOne({ "email": email, "password": password}, callback);
     }
