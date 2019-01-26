@@ -47,6 +47,8 @@ function loadTweets() {
 $(function() {
   $(".new-tweet").hide();
   $(".new-tweet").find("#errorMsg").hide();
+  $("#registerForm").hide();
+
   loadTweets();
 
   // When 'Compose Tweet' form is submitted:
@@ -106,13 +108,13 @@ $(function() {
     }
   });
 
-  let $loginForm = $('#loginForm');
-  $loginForm.on('submit', function(event) {
+  let $registerForm = $('#registerForm');
+  $registerForm.on('submit', function(event) {
     event.preventDefault();
     $.ajax({
       method: 'POST',
       url: '/users/register',
-      data: $loginForm.serialize()
+      data: $registerForm.serialize()
     });
   });
 });

@@ -17,17 +17,52 @@ module.exports = function(DataHelpers) {
     // });
   });
 
+  const generateRandomString = () => {
+    return Math.random().toString(36).substring(2, 8);
+  };
+
   usersRoutes.post("/register", function(req, res) {
+    let id = generateRandomString();
     let hash = bcrypt.hashSync(req.body.password, 10);
-    const user = {
+    let handle = `@${req.body.handle}`;
+    let user = {
+      id: id,
       name: req.body.name,
-      handle: req.body.handle,
+      handle: handle,
       email: req.body.email,
       password: hash
     };
-    console.log(user);
-    res.status(200).send();
-  });
 
+    DataHelpers.checkUniqueEmail(user, (err, result) => {
+      if (err) {
+        res.status(500).json({ error: err.message});;
+      } else {
+        if (result !== null) {
+          res.send("Email");
+          console.log("Email not unique");
+        } else {
+          DataHelpers.checkUniqueHandle(user, (err, result) => {
+            if (err) {
+              res.status(500).json({ error: err.message});
+            } else {
+              if (result !== null) {
+                res.send("Handle");
+                console.log("Handle not unique");
+              } else {
+                DataHelpers.userRegister(user, (err) => {
+                  if (err) {
+                    res.status(500).json({ error: err.message});
+                  } else {
+                    res.status(201).send();
+                    console.log("Success!");
+                    }
+                });
+              }
+            }
+          });
+        }
+      }
+    });
+  });
   return usersRoutes;
 };

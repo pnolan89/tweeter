@@ -38,8 +38,16 @@ module.exports = function makeDataHelpers(db) {
 
     },
 
-    userRegister: function(user_id, password, callback) {
+    userRegister: function(user, callback) {
+      db.collection("users").insert(user, callback);
+    },
 
+    checkUniqueEmail: function(user, callback) {
+      db.collection("users").findOne({ "email": user.email }, callback);
+    },
+
+    checkUniqueHandle: function(user, callback) {
+      db.collection("users").findOne({ "handle": user.handle }, callback);
     }
   };
 };
