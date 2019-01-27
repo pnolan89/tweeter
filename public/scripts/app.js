@@ -57,10 +57,16 @@ $(function() {
 
   // When Compose button is clicked: show new-tweet form and hide Compose button.
   let $button = $('.composeBtn');
+  let composeClick = 0;
   $button.on('click', function() {
-    $(".new-tweet").slideDown();
-    $(".new-tweet").find('textarea').focus();
-    $button.fadeOut();
+    if (composeClick === 0) {
+      $(".new-tweet").slideDown();
+      $(".new-tweet").find('textarea').focus();
+      composeClick = 1;
+    } else {
+      $(".new-tweet").slideUp();
+      composeClick = 0;
+    }
   });
 
   // When new-tweet form is submitted:
